@@ -6,7 +6,6 @@ class Calculate {
   final int height;
   final int weight;
   double _bmi = 0;
-  Color _textColor = Color(0xFF24D876);
   String result() {
     _bmi = (weight / pow(height / 100, 2));
     return _bmi.toStringAsFixed(1);
