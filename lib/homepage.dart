@@ -1,5 +1,5 @@
 import 'package:calculator/bmi/Screens/input_page.dart';
-import 'package:calculator/calculator.dart';
+import 'package:calculator/calculator/pages/MainPage.dart';
 import 'package:calculator/unitConverter/unitPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,7 +30,9 @@ class _HomePageState extends State<HomePage> {
               child: Text("Unit Converter"),
             ),
             ElevatedButton(
-              onPressed: () => Get.to(CalculatorPage()),
+              onPressed: () => Get.to(MainPage(
+                title: 'Calculator',
+              )),
               child: Text("Calculator"),
             ),
           ],
