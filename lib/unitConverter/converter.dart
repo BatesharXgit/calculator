@@ -12,7 +12,6 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
   String selectedInputUnit = 'Meters';
   String selectedOutputUnit = 'Feet';
 
-  // Conversion factors for various length units as doubles
   Map<String, double> lengthUnits = {
     'Meters': 1.0,
     'Feet': 3.28084,
@@ -24,11 +23,31 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
     'Millimeters': 1000.0,
   };
 
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertLength();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
   void convertLength() {
     double inputFactor = lengthUnits[selectedInputUnit]!;
     double outputFactor = lengthUnits[selectedOutputUnit]!;
     setState(() {
       outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(4));
     });
   }
 
@@ -44,12 +63,8 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextField(
+              controller: inputController,
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                setState(() {
-                  inputValue = double.tryParse(value) ?? 0.0;
-                });
-              },
               decoration: InputDecoration(labelText: 'Enter Length'),
             ),
             SizedBox(height: 20.0),
@@ -61,6 +76,7 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
                   onChanged: (value) {
                     setState(() {
                       selectedInputUnit = value!;
+                      convertLength(); // Update the conversion when input unit changes
                     });
                   },
                   items: lengthUnits.keys.map((unit) {
@@ -76,6 +92,7 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
                   onChanged: (value) {
                     setState(() {
                       selectedOutputUnit = value!;
+                      convertLength(); // Update the conversion when output unit changes
                     });
                   },
                   items: lengthUnits.keys.map((unit) {
@@ -88,12 +105,6 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
               ],
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                convertLength();
-              },
-              child: Text('Convert'),
-            ),
             SizedBox(height: 20.0),
             Text('Result: $outputValue $selectedOutputUnit'),
           ],
