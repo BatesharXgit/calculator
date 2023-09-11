@@ -6,15 +6,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:math_expressions/math_expressions.dart';
 
-class MainPage extends StatefulWidget {
-  MainPage({Key? key, required this.title}) : super(key: key);
+class CalculatorPage extends StatefulWidget {
+  CalculatorPage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _CalculatorPageState createState() => _CalculatorPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _CalculatorPageState extends State<CalculatorPage> {
   String _history = '';
   String _expression = '';
   bool _isDecimalUsed = false;
