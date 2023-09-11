@@ -65,15 +65,19 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            TextFormField(
-              controller: inputController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Enter Length',
-                border: OutlineInputBorder(), // Add border to text field
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(
+              height: 50,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
@@ -110,12 +114,15 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
-            Text(
-              'Result: $outputValue $selectedOutputUnit',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Length',
+                border: OutlineInputBorder(),
               ),
             ),
           ],
