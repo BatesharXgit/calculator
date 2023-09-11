@@ -1,4 +1,5 @@
 import 'package:calculator/bmi/Screens/input_page.dart';
+import 'package:calculator/unitConverter/unitPage.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: InputPage(),
+      home: UnitConverterPage(),
     );
   }
 }
