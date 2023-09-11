@@ -55,6 +55,9 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.black,
+        centerTitle: true,
         title: Text('Length Converter'),
       ),
       body: Padding(
@@ -62,10 +65,13 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            TextField(
+            TextFormField(
               controller: inputController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Enter Length'),
+              decoration: InputDecoration(
+                labelText: 'Enter Length',
+                border: OutlineInputBorder(), // Add border to text field
+              ),
             ),
             SizedBox(height: 20.0),
             Row(
@@ -76,7 +82,7 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
                   onChanged: (value) {
                     setState(() {
                       selectedInputUnit = value!;
-                      convertLength(); // Update the conversion when input unit changes
+                      convertLength();
                     });
                   },
                   items: lengthUnits.keys.map((unit) {
@@ -92,7 +98,7 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
                   onChanged: (value) {
                     setState(() {
                       selectedOutputUnit = value!;
-                      convertLength(); // Update the conversion when output unit changes
+                      convertLength();
                     });
                   },
                   items: lengthUnits.keys.map((unit) {
@@ -105,8 +111,13 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
               ],
             ),
             SizedBox(height: 20.0),
-            SizedBox(height: 20.0),
-            Text('Result: $outputValue $selectedOutputUnit'),
+            Text(
+              'Result: $outputValue $selectedOutputUnit',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
