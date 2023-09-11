@@ -2,7 +2,7 @@ import 'package:calculator/bmi/Screens/input_page.dart';
 import 'package:calculator/calculator/constants.dart';
 import 'package:calculator/calculator/modules/ReplaceHumanReadableChars.dart';
 import 'package:calculator/calculator/widgets/CalculatorButton.dart';
-import 'package:calculator/settings.dart';
+import 'package:calculator/util/settings.dart';
 import 'package:calculator/unitConverter/converterCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
