@@ -40,6 +40,10 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => Get.to(LengthConverterPage()),
               child: Text("Length Calculator"),
             ),
+            ElevatedButton(
+              onPressed: () => Get.to(AreaConverterPage()),
+              child: Text("Area Calculator"),
+            ),
           ],
         ),
       )),
