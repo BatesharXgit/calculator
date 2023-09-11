@@ -46,52 +46,48 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
           style: TextStyle(color: Colors.white),
         ),
       ),
+      backgroundColor: Colors.black,
       body: SafeArea(
-        child: Expanded(
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-            ),
-            itemCount: _units.length,
-            itemBuilder: (BuildContext context, int index) {
-              final unitName = _units[index];
-              final unitIcon = _icons[index];
-
-              return GestureDetector(
-                onTap: () {
-                  _navigateToCategoryPage(unitName);
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      child: Icon(
-                        unitIcon,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      left: 0,
-                      right: 0,
-                      child: Center(
-                        child: Text(
-                          unitName,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
           ),
+          itemCount: _units.length,
+          itemBuilder: (BuildContext context, int index) {
+            final unitName = _units[index];
+            final unitIcon = _icons[index];
+
+            return GestureDetector(
+              onTap: () {
+                _navigateToCategoryPage(unitName);
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                    child: Icon(
+                      unitIcon,
+                      color: Colors.white,
+                      size: 35,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    child: Text(
+                      unitName,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
