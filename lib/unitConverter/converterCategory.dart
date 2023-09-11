@@ -1,47 +1,6 @@
+import 'package:calculator/unitConverter/converter.dart';
 import 'package:flutter/material.dart';
-
-class IconTextStack extends StatelessWidget {
-  final IconData icon;
-  final String text;
-
-  const IconTextStack({
-    required this.icon,
-    required this.text,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: 100,
-          height: 100,
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            borderRadius: BorderRadius.circular(6.0),
-          ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 35,
-          ),
-        ),
-        Positioned(
-          bottom: 10,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+import 'package:get/get.dart';
 
 class UnitConverterPage extends StatefulWidget {
   const UnitConverterPage({Key? key}) : super(key: key);
@@ -51,6 +10,30 @@ class UnitConverterPage extends StatefulWidget {
 }
 
 class _UnitConverterPageState extends State<UnitConverterPage> {
+  List<String> _units = [
+    'Currency',
+    'Length',
+    'Area',
+    'Volume',
+    'Weight',
+    'Temperature',
+    'Speed',
+    'Pressure',
+    'Power'
+  ];
+
+  List<IconData> _icons = [
+    Icons.currency_exchange_outlined,
+    Icons.rule,
+    Icons.aspect_ratio,
+    Icons.volume_up_outlined,
+    Icons.airplanemode_active,
+    Icons.thermostat_outlined,
+    Icons.speed,
+    Icons.compress,
+    Icons.flash_on,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,66 +47,65 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
         ),
       ),
       body: SafeArea(
-        child: SizedBox(
-          height: 400,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconTextStack(
-                    icon: Icons.currency_exchange_outlined,
-                    text: "Currency",
-                  ),
-                  IconTextStack(
-                    icon: Icons.scale_outlined,
-                    text: "Length",
-                  ),
-                  IconTextStack(
-                    icon: Icons.area_chart_outlined,
-                    text: "Area",
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconTextStack(
-                    icon: Icons.gif_box_outlined,
-                    text: "Volume",
-                  ),
-                  IconTextStack(
-                    icon: Icons.scale_outlined,
-                    text: "Weight",
-                  ),
-                  IconTextStack(
-                    icon: Icons.gas_meter_outlined,
-                    text: "Temperature",
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconTextStack(
-                    icon: Icons.currency_exchange_outlined,
-                    text: "Speed",
-                  ),
-                  IconTextStack(
-                    icon: Icons.scale_outlined,
-                    text: "Pressure",
-                  ),
-                  IconTextStack(
-                    icon: Icons.area_chart_outlined,
-                    text: "Power",
-                  ),
-                ],
-              ),
-            ],
+        child: Expanded(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            itemCount: _units.length,
+            itemBuilder: (BuildContext context, int index) {
+              final unitName = _units[index];
+              final unitIcon = _icons[index];
+
+              return GestureDetector(
+                onTap: () {
+                  _navigateToCategoryPage(unitName);
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
+                      child: Icon(
+                        unitIcon,
+                        color: Colors.white,
+                        size: 35,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: Text(
+                          unitName,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
     );
+  }
+
+  void _navigateToCategoryPage(String unitName) {
+    switch (unitName) {
+      case 'Currency':
+        Get.to(() => AreaConverterPage(),
+            transition: Transition.leftToRightWithFade);
+        break;
+
+      default:
+        break;
+    }
   }
 }
