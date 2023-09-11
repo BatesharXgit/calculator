@@ -28,6 +28,10 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => Get.to(UnitConverterPage()),
               child: Text("Unit Converter"),
             ),
+            ElevatedButton(
+              onPressed: () => Get.to(UnitConverterPage()),
+              child: Text("Calculator"),
+            ),
           ],
         ),
       )),
