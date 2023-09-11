@@ -1,10 +1,53 @@
 import 'package:flutter/material.dart';
 
-class UnitConverterPage extends StatefulWidget {
-  const UnitConverterPage({super.key});
+class IconTextStack extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const IconTextStack({
+    required this.icon,
+    required this.text,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<UnitConverterPage> createState() => _UnitConverterPageState();
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+            color: Colors.amber,
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 35,
+          ),
+        ),
+        Positioned(
+          bottom: 10,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class UnitConverterPage extends StatefulWidget {
+  const UnitConverterPage({Key? key}) : super(key: key);
+
+  @override
+  _UnitConverterPageState createState() => _UnitConverterPageState();
 }
 
 class _UnitConverterPageState extends State<UnitConverterPage> {
@@ -29,235 +72,54 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        child: Icon(
-                          Icons.currency_exchange_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 35,
-                          child: Text(
-                            "Currency",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
+                  IconTextStack(
+                    icon: Icons.currency_exchange_outlined,
+                    text: "Currency",
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.scale_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                        bottom: 10,
-                        left: 30,
-                        child: Text(
-                          "Length",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
+                  IconTextStack(
+                    icon: Icons.scale_outlined,
+                    text: "Length",
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.area_chart_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 35,
-                          child: Text(
-                            "Area",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
-                  )
+                  IconTextStack(
+                    icon: Icons.area_chart_outlined,
+                    text: "Area",
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.currency_exchange_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 35,
-                          child: Text(
-                            "Currency",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
+                  IconTextStack(
+                    icon: Icons.gif_box_outlined,
+                    text: "Volume",
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.scale_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 30,
-                          child: Text(
-                            "Length",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
+                  IconTextStack(
+                    icon: Icons.scale_outlined,
+                    text: "Weight",
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.area_chart_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 35,
-                          child: Text(
-                            "Area",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
-                  )
+                  IconTextStack(
+                    icon: Icons.gas_meter_outlined,
+                    text: "Temperature",
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.currency_exchange_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 35,
-                          child: Text(
-                            "Currency",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
+                  IconTextStack(
+                    icon: Icons.currency_exchange_outlined,
+                    text: "Speed",
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.scale_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 30,
-                          child: Text(
-                            "Length",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
+                  IconTextStack(
+                    icon: Icons.scale_outlined,
+                    text: "Pressure",
                   ),
-                  Stack(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.circular(6.0),
-                        ),
-                        child: Icon(
-                          Icons.area_chart_outlined,
-                          color: Colors.white,
-                          size: 35,
-                        ),
-                      ),
-                      const Positioned(
-                          bottom: 10,
-                          left: 35,
-                          child: Text(
-                            "Area",
-                            style: TextStyle(color: Colors.white),
-                          ))
-                    ],
-                  )
+                  IconTextStack(
+                    icon: Icons.area_chart_outlined,
+                    text: "Power",
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

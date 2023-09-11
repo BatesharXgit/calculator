@@ -118,46 +118,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Stack(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Material(
-                  elevation: 4,
-                  borderRadius: BorderRadius.circular(8),
-                  child: InkWell(
-                    onTap: () => Get.to(BMICalculator()),
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        'BMI',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 20),
-                IconButton(
-                  iconSize: 30,
-                  icon: Icon(Icons.category_outlined),
-                  onPressed: () => Get.to(UnitConverterPage()),
-                ),
-                SizedBox(width: 20),
-                IconButton(
-                  iconSize: 30,
-                  icon: Icon(Icons.menu),
-                  onPressed: () => Get.to(UnitConverterPage()),
-                ),
-              ],
-            ),
+            topBar(),
             Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               Container(
                 padding: EdgeInsets.only(right: 12),
@@ -327,6 +288,48 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget topBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Material(
+          elevation: 4,
+          borderRadius: BorderRadius.circular(8),
+          child: InkWell(
+            onTap: () => Get.to(BMICalculator()),
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'BMI',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 10),
+        IconButton(
+          iconSize: 30,
+          icon: Icon(Icons.category_outlined),
+          onPressed: () => Get.to(UnitConverterPage()),
+        ),
+        // SizedBox(width: 5),
+        IconButton(
+          iconSize: 30,
+          icon: Icon(Icons.menu),
+          onPressed: () => Get.to(UnitConverterPage()),
+        ),
+      ],
     );
   }
 }
