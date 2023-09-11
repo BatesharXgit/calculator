@@ -10,9 +10,9 @@ import '../Components/BottomContainer_Button.dart';
 import '../bmi_calculator.dart';
 
 // ignore: must_be_immutable
-class InputPage extends StatefulWidget {
+class BMICalculator extends StatefulWidget {
   @override
-  _InputPageState createState() => _InputPageState();
+  _BMICalculatorState createState() => _BMICalculatorState();
 }
 
 //ENUMERATION : The action of establishing number of something , implicit way
@@ -21,7 +21,7 @@ enum Gender {
   female,
 }
 
-class _InputPageState extends State<InputPage> {
+class _BMICalculatorState extends State<BMICalculator> {
   //by default male will be selected
 
   late Gender selectedGender = Gender.male;
