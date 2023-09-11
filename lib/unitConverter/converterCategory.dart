@@ -96,10 +96,32 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
   void _navigateToCategoryPage(String unitName) {
     switch (unitName) {
       case 'Currency':
-        Get.to(() => AreaConverterPage(),
-            transition: Transition.leftToRightWithFade);
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
         break;
-
+      case 'Length':
+        Get.to(() => LengthConverterPage(), transition: Transition.native);
+        break;
+      case 'Area':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
+      case 'Volume':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
+      case 'Weight':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
+      case 'Temperature':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
+      case 'Speed':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
+      case 'Pressure':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
+      case 'Power':
+        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        break;
       default:
         break;
     }
