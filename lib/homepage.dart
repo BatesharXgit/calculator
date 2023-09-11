@@ -201,6 +201,7 @@ class _HomePageState extends State<HomePage> {
                     CalculatorButton(
                       label: '7',
                       callback: onNumberClick,
+                      fillColor: 0xFFE0E0E0,
                     ),
                     CalculatorButton(
                       label: '8',
