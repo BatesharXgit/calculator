@@ -25,9 +25,9 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
 
   List<IconData> _icons = [
     Iconsax.bitcoin_convert,
-    Icons.rule,
+    Iconsax.ruler,
     Icons.aspect_ratio,
-    Icons.volume_up_outlined,
+    Iconsax.convert_3d_cube,
     Iconsax.weight,
     Icons.thermostat_outlined,
     Icons.speed,
