@@ -1,34 +1,26 @@
 import 'package:flutter/material.dart';
 
+const kHistoryColor = Color(0xFF545F61);
+
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   colorScheme: ColorScheme.dark(
-    background: Color(0xFF131321),
-    primary: Color(0xFFE6EDFF),
-    secondary: Colors.grey,
-    tertiary: Color(0xFF1E1E2A),
+    background: Color(0xFF292D32),
+    primary: Color(0xFF21252A),
+    secondary: Color.fromARGB(255, 30, 34, 39),
+    tertiary: Color(0xFFECECEC),
   ),
   iconTheme: IconThemeData(color: Colors.white),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: Color(0xFF131321),
-    selectedItemColor: Color(0xFFE1E9F0),
-    unselectedItemColor: Colors.grey,
-  ),
 );
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(
-      background: Color(0xFFE6EDFF),
-      primary: Color(0xFF131321),
+      background: Color(0xFFECECEC),
+      primary: Color(0xFFC5C5C5),
       secondary: Colors.grey,
-      tertiary: Color(0xFFDCE2FA)),
+      tertiary: Color(0xFF292D32)),
   iconTheme: IconThemeData(
     color: Color(0xFF131321),
-  ),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: Color(0xFFE1E9F0),
-    selectedItemColor: Color(0xFF131321),
-    unselectedItemColor: Colors.grey,
   ),
 );

@@ -2,6 +2,7 @@ import 'package:calculator/bmi/Screens/input_page.dart';
 import 'package:calculator/calculator/constants.dart';
 import 'package:calculator/calculator/modules/ReplaceHumanReadableChars.dart';
 import 'package:calculator/calculator/widgets/CalculatorButton.dart';
+import 'package:calculator/themes/theme.dart';
 import 'package:calculator/util/settings.dart';
 import 'package:calculator/unitConverter/converterCategory.dart';
 import 'package:flutter/material.dart';
@@ -23,32 +24,6 @@ class _HomePageState extends State<HomePage> {
   String _expression = '';
   bool _isDecimalUsed = false;
   bool _isCalculated = false;
-
-  void onNumberClick(String number) {
-    if (isAnOperator(number)) {
-      setState(() {
-        _isDecimalUsed = false;
-      });
-    }
-    if (number == '.' && !_isDecimalUsed) {
-      setState(() {
-        _isDecimalUsed = true;
-        _expression += number;
-      });
-    }
-    if (!_isDecimalUsed || number != '.') {
-      if (_isCalculated) {
-        setState(() {
-          _expression = number;
-          _isCalculated = false;
-        });
-      } else {
-        setState(() {
-          _expression += number;
-        });
-      }
-    }
-  }
 
   bool isAnOperator(String number) {
     return "/%√×-+".contains(number);
@@ -83,18 +58,44 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void onNumberClick(String number) {
+    if (isAnOperator(number)) {
+      setState(() {
+        _isDecimalUsed = false;
+      });
+    }
+    if (number == '.' && !_isDecimalUsed) {
+      setState(() {
+        _isDecimalUsed = true;
+        _expression += number;
+      });
+    }
+    if (!_isDecimalUsed || number != '.') {
+      setState(() {
+        if (_isCalculated) {
+          // If a calculation has been performed, start a new expression.
+          _history = _expression; // Move the current expression to history.
+          _expression = number;
+          _isCalculated = false;
+        } else {
+          _expression += number;
+        }
+      });
+    }
+  }
+
   void calculate(String equal) {
     /*
-     * Replaces all human readable characters to
-     * computer readable characters, e.g: × -> *
-    */
+   * Replaces all human-readable characters to
+   * computer-readable characters, e.g., × -> *
+  */
 
     String input = replaceHumanReadableChars(_expression);
 
     /* 
-     * Using math_expressions package: https://pub.dev/packages/math_expressions
-     * It takes an expression and returns the calculated value.
-    */
+   * Using math_expressions package: https://pub.dev/packages/math_expressions
+   * It takes an expression and returns the calculated value.
+  */
 
     Parser parser = Parser();
     Expression expression = parser.parse(input);
@@ -106,20 +107,44 @@ class _HomePageState extends State<HomePage> {
         calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
 
     setState(() {
-      _history = _expression;
+      if (_isCalculated) {
+        // If a calculation has been performed, use the result as the history.
+        _history = _expression + ' = ' + _history;
+      } else {
+        _history = _expression;
+      }
       _expression = result;
-      _isCalculated = true;
+      _isCalculated =
+          false; // Reset _isCalculated to allow further calculations.
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColour = Theme.of(context).colorScheme.background;
+    Color primaryColour = Theme.of(context).colorScheme.primary;
+    Color secondaryColour = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
-      backgroundColor: kMainColor,
+      backgroundColor: backgroundColour,
       body: SafeArea(
         child: Stack(
           children: [
             topBar(),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.515,
+                decoration: BoxDecoration(
+                  color: primaryColour,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+              ),
+            ),
             Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               Container(
                 padding: EdgeInsets.only(right: 12),
@@ -135,7 +160,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   _expression,
                   style: GoogleFonts.rubik(
-                      textStyle: TextStyle(fontSize: 48), color: kWhite),
+                      textStyle: TextStyle(fontSize: 48),
+                      color: tertiaryColour),
                 ),
                 alignment: kExpressionAligment,
               ),
@@ -186,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                       // Backspace Button
 
                       onPressed: onBackSpaceClick,
-                      color: kWhite,
+                      color: secondaryColour,
                       textColor: Color(kOperationButtonTextColor),
                       child: Icon(
                         Icons.backspace_rounded,

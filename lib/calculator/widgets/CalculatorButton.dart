@@ -25,8 +25,8 @@ class CalculatorButton extends StatelessWidget {
               callback(label);
             },
             child: Text(label,
-                style:
-                    GoogleFonts.rubik(textStyle: TextStyle(fontSize: textSize))),
+                style: GoogleFonts.rubik(
+                    textStyle: TextStyle(fontSize: textSize))),
             style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsets>(
                     EdgeInsets.fromLTRB(15, 5, 15, 5)),
