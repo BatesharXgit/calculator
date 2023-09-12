@@ -1137,6 +1137,7 @@ class _SpeedConverterPageState extends State<SpeedConverterPage> {
     );
   }
 }
+
 class PressureConverterPage extends StatefulWidget {
   @override
   _PressureConverterPageState createState() => _PressureConverterPageState();
@@ -1325,3 +1326,190 @@ class _PressureConverterPageState extends State<PressureConverterPage> {
   }
 }
 
+class PowerConverterPage extends StatefulWidget {
+  @override
+  _PowerConverterPageState createState() => _PowerConverterPageState();
+}
+
+class _PowerConverterPageState extends State<PowerConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Watts';
+  String selectedOutputUnit = 'Horsepower';
+
+  Map<String, double> powerUnits = {
+    'Watts': 1.0,
+    'Kilowatts': 0.001,
+    'Horsepower': 0.00134102,
+    'Megawatts': 0.000001,
+    'Foot-Pounds per Second': 737.562,
+    // Add other power units and conversion factors as needed
+  };
+
+  List<Map<String, String>> powerUnitsWithAbbreviations = [
+    {'name': 'Watts', 'abbreviation': 'W'},
+    {'name': 'Kilowatts', 'abbreviation': 'kW'},
+    {'name': 'Horsepower', 'abbreviation': 'hp'},
+    {'name': 'Megawatts', 'abbreviation': 'MW'},
+    {'name': 'Foot-Pounds per Second', 'abbreviation': 'ft-lb/s'},
+    // Add other power units with abbreviations as needed
+  ];
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertPower();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertPower() {
+    double inputFactor = powerUnits[selectedInputUnit]!;
+    double outputFactor = powerUnits[selectedOutputUnit]!;
+    setState(() {
+      outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(4));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Power Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertPower();
+                          });
+                        },
+                        items: powerUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertPower();
+                          });
+                        },
+                        items: powerUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Power',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
