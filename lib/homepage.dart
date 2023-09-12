@@ -155,12 +155,12 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  CalculatorButton(
+                  CalculatorButtonRed(
                       label: 'AC',
                       // fillColor: secondaryColour,
                       textSize: 22,
                       callback: onAllClearClick),
-                  CalculatorButton(
+                  CalculatorButtonGreen(
                     label: 'C',
                     // fillColor: secondaryColour,
                     callback: onClearClick,
@@ -176,22 +176,22 @@ class _HomePageState extends State<HomePage> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    CalculatorButton(
+                    CalculatorButtonGreen(
                       label: '%',
                       // fillColor: kOperationButtonsColor,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
-                    CalculatorButton(
+                    CalculatorButtonGreen(
                       label: '/',
                       // fillColor: kOperationButtonsColor,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
-                    CalculatorButton(
+                    CalculatorButtonGreen(
                       label: '√',
                       // fillColor: secondaryColour,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
                     MaterialButton(
@@ -203,6 +203,7 @@ class _HomePageState extends State<HomePage> {
                       child: Icon(
                         Icons.backspace_rounded,
                         size: 20,
+                        color: kTextColorRed,
                       ),
                       padding: EdgeInsets.all(20),
                       shape: CircleBorder(),
@@ -224,10 +225,10 @@ class _HomePageState extends State<HomePage> {
                       label: '9',
                       callback: onNumberClick,
                     ),
-                    CalculatorButton(
+                    CalculatorButtonRed(
                       label: '×',
                       // fillColor: kOperationButtonsColor,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
                   ]),
@@ -246,10 +247,10 @@ class _HomePageState extends State<HomePage> {
                       label: '6',
                       callback: onNumberClick,
                     ),
-                    CalculatorButton(
+                    CalculatorButtonRed(
                       label: '-',
                       // fillColor: kOperationButtonsColor,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
                   ]),
@@ -268,10 +269,10 @@ class _HomePageState extends State<HomePage> {
                       label: '3',
                       callback: onNumberClick,
                     ),
-                    CalculatorButton(
+                    CalculatorButtonRed(
                       label: '+',
                       // fillColor: kOperationButtonsColor,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
                   ]),
@@ -291,10 +292,11 @@ class _HomePageState extends State<HomePage> {
                       textSize: 22,
                       callback: onNumberClick,
                     ),
-                    CalculatorButton(
+                    CalculatorButtonRed(
                       label: '=',
+
                       // fillColor: kOperationButtonsColor,
-                      textColor: kOperationButtonTextColor,
+                      // textColor: kOperationButtonTextColor,
                       callback: calculate,
                     ),
                   ]),

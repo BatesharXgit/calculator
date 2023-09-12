@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const kHistoryColor = Color(0xFF545F61);
+const kTextColorRed = Color(0xFFF56A7A);
+const kTextColorGreen = Color(0xFF6BD66A);
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
