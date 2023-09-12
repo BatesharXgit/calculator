@@ -5,16 +5,17 @@ class CalculatorButton extends StatelessWidget {
   CalculatorButton(
       {required this.label,
       this.textColor = 0xFFFFFFFF,
-      this.fillColor = 0x00ffffff,
+      // this.fillColor = 0x00ffffff,
       this.textSize = 26,
       required this.callback});
   final String label;
   final int textColor;
-  final int fillColor;
+  // final int fillColor;
   final double textSize;
   final Function callback;
   @override
   Widget build(BuildContext context) {
+    Color secondaryColour = Theme.of(context).colorScheme.secondary;
     return Container(
       margin: EdgeInsets.all(10),
       child: SizedBox(
@@ -31,7 +32,7 @@ class CalculatorButton extends StatelessWidget {
                 padding: MaterialStateProperty.all<EdgeInsets>(
                     EdgeInsets.fromLTRB(15, 5, 15, 5)),
                 backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(fillColor)),
+                    MaterialStateProperty.all<Color>(secondaryColour),
                 foregroundColor:
                     MaterialStateProperty.all<Color>(Color(textColor)),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

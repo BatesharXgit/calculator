@@ -157,12 +157,12 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   CalculatorButton(
                       label: 'AC',
-                      fillColor: kClearButtonsColor,
+                      // fillColor: secondaryColour,
                       textSize: 22,
                       callback: onAllClearClick),
                   CalculatorButton(
                     label: 'C',
-                    fillColor: kClearButtonsColor,
+                    // fillColor: secondaryColour,
                     callback: onClearClick,
                   ),
                   SizedBox(
@@ -178,19 +178,19 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     CalculatorButton(
                       label: '%',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: kOperationButtonsColor,
                       textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
                     CalculatorButton(
                       label: '/',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: kOperationButtonsColor,
                       textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
                     CalculatorButton(
                       label: '√',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: secondaryColour,
                       textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                     CalculatorButton(
                       label: '7',
                       callback: onNumberClick,
-                      fillColor: 0xFFE0E0E0,
+                      // fillColor: 0xFFE0E0E0,
                     ),
                     CalculatorButton(
                       label: '8',
@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CalculatorButton(
                       label: '×',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: kOperationButtonsColor,
                       textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
@@ -248,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CalculatorButton(
                       label: '-',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: kOperationButtonsColor,
                       textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
@@ -270,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CalculatorButton(
                       label: '+',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: kOperationButtonsColor,
                       textColor: kOperationButtonTextColor,
                       callback: onNumberClick,
                     ),
@@ -293,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CalculatorButton(
                       label: '=',
-                      fillColor: kOperationButtonsColor,
+                      // fillColor: kOperationButtonsColor,
                       textColor: kOperationButtonTextColor,
                       callback: calculate,
                     ),
