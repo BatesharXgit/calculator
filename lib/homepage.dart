@@ -346,7 +346,7 @@ class _HomePageState extends State<HomePage> {
         SizedBox(width: 12),
         IconButton(
           iconSize: 28,
-          icon: Icon(Iconsax.category),
+          icon: Icon(Iconsax.convertshape),
           onPressed: () =>
               Get.to(UnitConverterPage(), transition: Transition.native),
         ),
