@@ -73,8 +73,7 @@ class _HomePageState extends State<HomePage> {
     if (!_isDecimalUsed || number != '.') {
       setState(() {
         if (_isCalculated) {
-          // If a calculation has been performed, start a new expression.
-          _history = _expression; // Move the current expression to history.
+          _history = _expression;
           _expression = number;
           _isCalculated = false;
         } else {
@@ -85,37 +84,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void calculate(String equal) {
-    /*
-   * Replaces all human-readable characters to
-   * computer-readable characters, e.g., × -> *
-  */
-
     String input = replaceHumanReadableChars(_expression);
-
-    /* 
-   * Using math_expressions package: https://pub.dev/packages/math_expressions
-   * It takes an expression and returns the calculated value.
-  */
 
     Parser parser = Parser();
     Expression expression = parser.parse(input);
     ContextModel contextModel = ContextModel();
     double calculated = expression.evaluate(EvaluationType.REAL, contextModel);
 
-    // Removes all the trailing zeros since it's of type of double.
     String result =
         calculated.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
 
     setState(() {
       if (_isCalculated) {
-        // If a calculation has been performed, use the result as the history.
         _history = _expression + ' = ' + _history;
       } else {
         _history = _expression;
       }
       _expression = result;
-      _isCalculated =
-          false; // Reset _isCalculated to allow further calculations.
+      _isCalculated = false;
     });
   }
 
