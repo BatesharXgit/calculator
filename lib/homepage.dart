@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
@@ -327,7 +328,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () => Get.to(BMICalculator()),
             borderRadius: BorderRadius.circular(8),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(8),
@@ -342,17 +343,18 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: 12),
         IconButton(
-          iconSize: 30,
-          icon: Icon(Icons.category_outlined),
-          onPressed: () => Get.to(UnitConverterPage()),
+          iconSize: 28,
+          icon: Icon(Iconsax.category),
+          onPressed: () =>
+              Get.to(UnitConverterPage(), transition: Transition.native),
         ),
-        // SizedBox(width: 5),
         IconButton(
           iconSize: 30,
-          icon: Icon(Icons.menu),
-          onPressed: () => Get.to(SettingsPage()),
+          icon: Icon(Iconsax.setting_3),
+          onPressed: () => Get.to(SettingsPage(),
+              transition: Transition.rightToLeftWithFade),
         ),
       ],
     );

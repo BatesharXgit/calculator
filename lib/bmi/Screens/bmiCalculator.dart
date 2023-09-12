@@ -9,24 +9,20 @@ import 'Results_Page.dart';
 import '../Components/BottomContainer_Button.dart';
 import '../bmi_calculator.dart';
 
-// ignore: must_be_immutable
 class BMICalculator extends StatefulWidget {
   @override
   _BMICalculatorState createState() => _BMICalculatorState();
 }
 
-//ENUMERATION : The action of establishing number of something , implicit way
 enum Gender {
   male,
   female,
 }
 
 class _BMICalculatorState extends State<BMICalculator> {
-  //by default male will be selected
-
   late Gender selectedGender = Gender.male;
   int height = 180;
-  int weight = 50;
+  int weight = 60;
   int age = 20;
   @override
   Widget build(BuildContext context) {
@@ -46,7 +42,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                           selectedGender = Gender.male;
                         });
                       },
-                      child: ReusableBg(
+                      child: BMIContainer(
                         colour: selectedGender == Gender.male
                             ? kactiveCardColor
                             : kinactiveCardColor,
@@ -62,7 +58,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                           selectedGender = Gender.female;
                         });
                       },
-                      child: ReusableBg(
+                      child: BMIContainer(
                         colour: selectedGender == Gender.female
                             ? kactiveCardColor
                             : kinactiveCardColor,
@@ -75,7 +71,7 @@ class _BMICalculatorState extends State<BMICalculator> {
               ),
             ),
             Expanded(
-              child: ReusableBg(
+              child: BMIContainer(
                 colour: kactiveCardColor,
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +125,7 @@ class _BMICalculatorState extends State<BMICalculator> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ReusableBg(
+                    child: BMIContainer(
                       colour: kactiveCardColor,
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -171,7 +167,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                     ),
                   ),
                   Expanded(
-                    child: ReusableBg(
+                    child: BMIContainer(
                       colour: kactiveCardColor,
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
