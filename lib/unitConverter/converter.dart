@@ -1137,3 +1137,191 @@ class _SpeedConverterPageState extends State<SpeedConverterPage> {
     );
   }
 }
+class PressureConverterPage extends StatefulWidget {
+  @override
+  _PressureConverterPageState createState() => _PressureConverterPageState();
+}
+
+class _PressureConverterPageState extends State<PressureConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Pascals';
+  String selectedOutputUnit = 'Pounds per Square Inch';
+
+  Map<String, double> pressureUnits = {
+    'Pascals': 1.0,
+    'Kilopascals': 0.001,
+    'Bars': 0.00001,
+    'Pounds per Square Inch': 0.00014503773773375,
+    'Millimeters of Mercury': 0.00750062,
+    // Add other pressure units and conversion factors as needed
+  };
+
+  List<Map<String, String>> pressureUnitsWithAbbreviations = [
+    {'name': 'Pascals', 'abbreviation': 'Pa'},
+    {'name': 'Kilopascals', 'abbreviation': 'kPa'},
+    {'name': 'Bars', 'abbreviation': 'bar'},
+    {'name': 'Pounds per Square Inch', 'abbreviation': 'psi'},
+    {'name': 'Millimeters of Mercury', 'abbreviation': 'mmHg'},
+    // Add other pressure units with abbreviations as needed
+  ];
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertPressure();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertPressure() {
+    double inputFactor = pressureUnits[selectedInputUnit]!;
+    double outputFactor = pressureUnits[selectedOutputUnit]!;
+    setState(() {
+      outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(4));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Pressure Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertPressure();
+                          });
+                        },
+                        items: pressureUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertPressure();
+                          });
+                        },
+                        items: pressureUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Pressure',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
