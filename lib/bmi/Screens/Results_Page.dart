@@ -2,7 +2,7 @@ import 'package:calculator/bmi/Components/BottomContainer_Button.dart';
 import 'package:calculator/bmi/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Components/Reusable_Bg.dart';
+import '../Components/bmiContainer.dart';
 
 class ResultPage extends StatelessWidget {
   final String resultText;
@@ -18,8 +18,13 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColour = Theme.of(context).colorScheme.background;
+    Color primaryColour = Theme.of(context).colorScheme.primary;
+    Color secondaryColour = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: null,
+      backgroundColor: backgroundColour,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,8 +42,8 @@ class ResultPage extends StatelessWidget {
             ),
             Expanded(
               flex: 5,
-              child: ReusableBg(
-                colour: kactiveCardColor,
+              child: BMIContainer(
+                colour: primaryColour,
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,21 +76,21 @@ class ResultPage extends StatelessWidget {
                     SizedBox(
                       height: 15.0,
                     ),
-                    RawMaterialButton(
-                      onPressed: () {},
-                      constraints: BoxConstraints.tightFor(
-                        width: 200.0,
-                        height: 56.0,
-                      ),
-                      fillColor: Color(0xFF4C4F5E),
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      child: Text(
-                        'SAVE RESULT',
-                        style: kBodyTextStyle,
-                      ),
-                    ),
+                    // RawMaterialButton(
+                    //   onPressed: () {},
+                    //   constraints: BoxConstraints.tightFor(
+                    //     width: 200.0,
+                    //     height: 56.0,
+                    //   ),
+                    //   fillColor: Color(0xFF4C4F5E),
+                    //   elevation: 0.0,
+                    //   shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10.0)),
+                    //   child: Text(
+                    //     'SAVE RESULT',
+                    //     style: kBodyTextStyle,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

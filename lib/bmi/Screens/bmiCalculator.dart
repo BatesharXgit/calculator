@@ -1,8 +1,9 @@
+import 'package:calculator/themes/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../Components/Icon_Content.dart';
-import '../Components/Reusable_Bg.dart';
+import '../Components/bmiContainer.dart';
 import '../Components/RoundIcon_Button.dart';
 import '../constants.dart';
 import 'Results_Page.dart';
@@ -26,8 +27,21 @@ class _BMICalculatorState extends State<BMICalculator> {
   int age = 20;
   @override
   Widget build(BuildContext context) {
+    Color backgroundColour = Theme.of(context).colorScheme.background;
+    Color primaryColour = Theme.of(context).colorScheme.primary;
+    Color secondaryColour = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
-      appBar: null,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: backgroundColour,
+        title: Text(
+          'BMI Calculator',
+          style: TextStyle(color: tertiaryColour),
+        ),
+      ),
+      backgroundColor: backgroundColour,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -44,8 +58,8 @@ class _BMICalculatorState extends State<BMICalculator> {
                       },
                       child: BMIContainer(
                         colour: selectedGender == Gender.male
-                            ? kactiveCardColor
-                            : kinactiveCardColor,
+                            ? primaryColour
+                            : secondaryColour,
                         cardChild: IconContent(
                             myicon: FontAwesomeIcons.mars, text: 'MALE'),
                       ),
@@ -60,8 +74,8 @@ class _BMICalculatorState extends State<BMICalculator> {
                       },
                       child: BMIContainer(
                         colour: selectedGender == Gender.female
-                            ? kactiveCardColor
-                            : kinactiveCardColor,
+                            ? primaryColour
+                            : secondaryColour,
                         cardChild: IconContent(
                             myicon: FontAwesomeIcons.venus, text: 'FEMALE'),
                       ),
@@ -72,7 +86,7 @@ class _BMICalculatorState extends State<BMICalculator> {
             ),
             Expanded(
               child: BMIContainer(
-                colour: kactiveCardColor,
+                colour: primaryColour,
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -99,8 +113,8 @@ class _BMICalculatorState extends State<BMICalculator> {
                       data: SliderTheme.of(context).copyWith(
                         activeTrackColor: Colors.white,
                         inactiveTrackColor: ksliderInactiveColor,
-                        thumbColor: Colors.amber,
-                        overlayColor: Colors.red,
+                        thumbColor: kTextColorGreen,
+                        overlayColor: kTextColorRed,
                         thumbShape:
                             RoundSliderThumbShape(enabledThumbRadius: 15.0),
                         overlayShape:
@@ -126,7 +140,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                 children: [
                   Expanded(
                     child: BMIContainer(
-                      colour: kactiveCardColor,
+                      colour: primaryColour,
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -168,7 +182,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                   ),
                   Expanded(
                     child: BMIContainer(
-                      colour: kactiveCardColor,
+                      colour: primaryColour,
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
