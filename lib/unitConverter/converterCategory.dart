@@ -86,7 +86,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                     ),
                   ),
                   Positioned(
-                    bottom: 20,
+                    bottom: 25,
                     child: Text(
                       unitName,
                       style: TextStyle(color: tertiaryColor),
