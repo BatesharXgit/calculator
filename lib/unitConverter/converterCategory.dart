@@ -1,6 +1,7 @@
 import 'package:calculator/unitConverter/converter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class UnitConverterPage extends StatefulWidget {
   const UnitConverterPage({Key? key}) : super(key: key);
@@ -23,11 +24,11 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
   ];
 
   List<IconData> _icons = [
-    Icons.currency_exchange_outlined,
+    Iconsax.bitcoin_convert,
     Icons.rule,
     Icons.aspect_ratio,
     Icons.volume_up_outlined,
-    Icons.airplanemode_active,
+    Iconsax.weight,
     Icons.thermostat_outlined,
     Icons.speed,
     Icons.compress,
