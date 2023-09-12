@@ -1,4 +1,4 @@
-import 'package:calculator/bmi/Screens/input_page.dart';
+import 'package:calculator/bmi/Screens/bmiCalculator.dart';
 import 'package:calculator/calculator/constants.dart';
 import 'package:calculator/calculator/modules/ReplaceHumanReadableChars.dart';
 import 'package:calculator/calculator/widgets/CalculatorButton.dart';
@@ -59,25 +59,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onNumberClick(String number) {
-    if (isAnOperator(number)) {
-      setState(() {
-        _isDecimalUsed = false;
-      });
-    }
     if (number == '.' && !_isDecimalUsed) {
       setState(() {
         _isDecimalUsed = true;
         _expression += number;
       });
-    }
-    if (!_isDecimalUsed || number != '.') {
+    } else if (!_isDecimalUsed || number != '.') {
       setState(() {
         if (_isCalculated) {
-          _history = _expression;
+          // If a calculation has been performed, start a new expression.
+          _history = _expression; // Move the current expression to history.
           _expression = number;
           _isCalculated = false;
         } else {
-          _expression += number;
+          // Check if the last character is an operator and replace it.
+          final lastChar =
+              _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
+          if (isAnOperator(lastChar) && isAnOperator(number)) {
+            // Replace the last character with the new operator.
+            _expression =
+                _expression.substring(0, _expression.length - 1) + number;
+          } else {
+            _expression += number;
+          }
         }
       });
     }
