@@ -112,10 +112,10 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
         Get.to(() => AreaConverterPage(), transition: Transition.native);
         break;
       case 'Volume':
-        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        Get.to(() => VolumeConverterPage(), transition: Transition.native);
         break;
       case 'Weight':
-        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        Get.to(() => WeightConverterPage(), transition: Transition.native);
         break;
       case 'Temperature':
         Get.to(() => AreaConverterPage(), transition: Transition.native);

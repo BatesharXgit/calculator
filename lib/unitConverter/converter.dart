@@ -227,7 +227,6 @@ class _AreaConverterPageState extends State<AreaConverterPage> {
     'Square Feet': 10763910.4,
     'Square Inches': 1550003100.0,
     'Square Yards': 1195990.05,
-    // Add other area units and conversion factors as needed
   };
 
   List<Map<String, String>> areaUnitsWithAbbreviations = [
@@ -237,7 +236,6 @@ class _AreaConverterPageState extends State<AreaConverterPage> {
     {'name': 'Square Feet', 'abbreviation': 'ft²'},
     {'name': 'Square Inches', 'abbreviation': 'in²'},
     {'name': 'Square Yards', 'abbreviation': 'yd²'},
-    // Add other area units with abbreviations as needed
   ];
 
   TextEditingController inputController = TextEditingController();
@@ -388,6 +386,563 @@ class _AreaConverterPageState extends State<AreaConverterPage> {
                 fillColor: tertiaryColor,
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VolumeConverterPage extends StatefulWidget {
+  @override
+  _VolumeConverterPageState createState() => _VolumeConverterPageState();
+}
+
+class _VolumeConverterPageState extends State<VolumeConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Cubic Meters';
+  String selectedOutputUnit = 'Cubic Feet';
+
+  Map<String, double> volumeUnits = {
+    'Cubic Kilometers': 1.0,
+    'Cubic Meters': 1000000000.0,
+    'Cubic Miles': 0.239913,
+    'Cubic Feet': 35314666.8,
+    'Cubic Inches': 610237440000.0,
+    // Add other volume units and conversion factors as needed
+  };
+
+  List<Map<String, String>> volumeUnitsWithAbbreviations = [
+    {'name': 'Cubic Kilometers', 'abbreviation': 'km³'},
+    {'name': 'Cubic Meters', 'abbreviation': 'm³'},
+    {'name': 'Cubic Miles', 'abbreviation': 'mi³'},
+    {'name': 'Cubic Feet', 'abbreviation': 'ft³'},
+    {'name': 'Cubic Inches', 'abbreviation': 'in³'},
+  ];
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertVolume();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertVolume() {
+    double inputFactor = volumeUnits[selectedInputUnit]!;
+    double outputFactor = volumeUnits[selectedOutputUnit]!;
+    setState(() {
+      outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(4));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Volume Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertVolume();
+                          });
+                        },
+                        items: volumeUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertVolume();
+                          });
+                        },
+                        items: volumeUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Volume',
+                fillColor: tertiaryColor,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WeightConverterPage extends StatefulWidget {
+  @override
+  _WeightConverterPageState createState() => _WeightConverterPageState();
+}
+
+class _WeightConverterPageState extends State<WeightConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Kilograms';
+  String selectedOutputUnit = 'Pounds';
+
+  Map<String, double> weightUnits = {
+    'Kilograms': 1.0,
+    'Grams': 1000.0,
+    'Milligrams': 1000000.0,
+    'Pounds': 2.20462,
+    'Ounces': 35.274,
+    // Add other weight units and conversion factors as needed
+  };
+
+  List<Map<String, String>> weightUnitsWithAbbreviations = [
+    {'name': 'Kilograms', 'abbreviation': 'kg'},
+    {'name': 'Grams', 'abbreviation': 'g'},
+    {'name': 'Milligrams', 'abbreviation': 'mg'},
+    {'name': 'Pounds', 'abbreviation': 'lb'},
+    {'name': 'Ounces', 'abbreviation': 'oz'},
+    // Add other weight units with abbreviations as needed
+  ];
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertWeight();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertWeight() {
+    double inputFactor = weightUnits[selectedInputUnit]!;
+    double outputFactor = weightUnits[selectedOutputUnit]!;
+    setState(() {
+      outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(4));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Weight Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertWeight();
+                          });
+                        },
+                        items: weightUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertWeight();
+                          });
+                        },
+                        items: weightUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Weight',
+                fillColor: tertiaryColor,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TemperatureConverterPage extends StatefulWidget {
+  @override
+  _TemperatureConverterPageState createState() =>
+      _TemperatureConverterPageState();
+}
+
+class _TemperatureConverterPageState extends State<TemperatureConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Celsius';
+  String selectedOutputUnit = 'Fahrenheit';
+
+  double convertTemperature(double value, String fromUnit, String toUnit) {
+    // Define conversion factors for various temperature units
+    final Map<String, double> temperatureFactors = {
+      'Celsius': 1.0,
+      'Fahrenheit': 1.8,
+      'Kelvin': 1.0,
+    };
+
+    // Convert to a common base unit (Kelvin)
+    final double baseValue = value + 273.15;
+    final double kelvinValue = baseValue / temperatureFactors[fromUnit]!;
+
+    // Convert from Kelvin to the target unit
+    final double convertedValue = kelvinValue * temperatureFactors[toUnit]!;
+
+    return convertedValue;
+  }
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertTemperatureAndSetState();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertTemperatureAndSetState() {
+    outputValue =
+        convertTemperature(inputValue, selectedInputUnit, selectedOutputUnit);
+    outputValue = double.parse(outputValue.toStringAsFixed(2));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Temperature Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertTemperatureAndSetState();
+                          });
+                        },
+                        items: ['Celsius', 'Fahrenheit', 'Kelvin'].map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit,
+                            child: Text(unit),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertTemperatureAndSetState();
+                          });
+                        },
+                        items: ['Celsius', 'Fahrenheit', 'Kelvin'].map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit,
+                            child: Text(unit),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Temperature',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
               ),
             ),
           ],
