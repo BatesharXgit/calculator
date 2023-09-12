@@ -36,17 +36,21 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color primaryColor = Theme.of(context).colorScheme.primary;
+    // Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor,
         elevation: 0,
         centerTitle: true,
         title: Text(
           'Unit Converter',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: tertiaryColor),
         ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -68,12 +72,15 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(6.0),
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
+                  ),
+                  Positioned(
+                    top: 38,
                     child: Icon(
                       unitIcon,
-                      color: Colors.white,
+                      color: tertiaryColor,
                       size: 35,
                     ),
                   ),
@@ -81,7 +88,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
                     bottom: 20,
                     child: Text(
                       unitName,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: tertiaryColor),
                     ),
                   ),
                 ],

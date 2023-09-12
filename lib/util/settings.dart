@@ -9,7 +9,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
     Color primaryColor = Theme.of(context).colorScheme.primary;
-    Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    // Color secondaryColor = Theme.of(context).colorScheme.secondary;
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
@@ -36,8 +36,10 @@ class SettingsPage extends StatelessWidget {
                 children: <Widget>[
                   ListTile(
                     title: const Text('Version'),
-                    subtitle:
-                        Text('1.0.0', style: TextStyle(color: tertiaryColor)),
+                    subtitle: Text(
+                      '1.0.0',
+                      style: TextStyle(color: tertiaryColor),
+                    ),
                   ),
                   ListTile(
                     title: const Text('About'),

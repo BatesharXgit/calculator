@@ -5,14 +5,21 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color primaryColor = Theme.of(context).colorScheme.primary;
+    // Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor,
         elevation: 0,
         centerTitle: true,
-        title: Text("About"),
+        title: Text(
+          "About",
+          style: TextStyle(color: tertiaryColor),
+        ),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -46,7 +53,7 @@ class AboutPage extends StatelessWidget {
                   width: 300,
                   height: 80,
                   decoration: BoxDecoration(
-                    color: Colors.blueGrey,
+                    color: primaryColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(

@@ -353,8 +353,8 @@ class _HomePageState extends State<HomePage> {
         IconButton(
           iconSize: 30,
           icon: Icon(Iconsax.setting_3),
-          onPressed: () => Get.to(SettingsPage(),
-              transition: Transition.rightToLeftWithFade),
+          onPressed: () =>
+              Get.to(SettingsPage(), transition: Transition.native),
         ),
       ],
     );
