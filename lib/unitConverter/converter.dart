@@ -951,3 +951,189 @@ class _TemperatureConverterPageState extends State<TemperatureConverterPage> {
     );
   }
 }
+
+class SpeedConverterPage extends StatefulWidget {
+  @override
+  _SpeedConverterPageState createState() => _SpeedConverterPageState();
+}
+
+class _SpeedConverterPageState extends State<SpeedConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Meters per Second';
+  String selectedOutputUnit = 'Kilometers per Hour';
+
+  Map<String, double> speedUnits = {
+    'Meters per Second': 1.0,
+    'Kilometers per Hour': 3.6,
+    'Miles per Hour': 2.23694,
+    'Feet per Second': 3.28084,
+    // Add other speed units and conversion factors as needed
+  };
+
+  List<Map<String, String>> speedUnitsWithAbbreviations = [
+    {'name': 'Meters per Second', 'abbreviation': 'm/s'},
+    {'name': 'Kilometers per Hour', 'abbreviation': 'km/h'},
+    {'name': 'Miles per Hour', 'abbreviation': 'mi/h'},
+    {'name': 'Feet per Second', 'abbreviation': 'ft/s'},
+    // Add other speed units with abbreviations as needed
+  ];
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertSpeed();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertSpeed() {
+    double inputFactor = speedUnits[selectedInputUnit]!;
+    double outputFactor = speedUnits[selectedOutputUnit]!;
+    setState(() {
+      outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(2));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Speed Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertSpeed();
+                          });
+                        },
+                        items: speedUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertSpeed();
+                          });
+                        },
+                        items: speedUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Speed',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

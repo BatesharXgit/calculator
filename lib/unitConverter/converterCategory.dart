@@ -118,7 +118,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
         Get.to(() => WeightConverterPage(), transition: Transition.native);
         break;
       case 'Temperature':
-        Get.to(() => AreaConverterPage(), transition: Transition.native);
+        Get.to(() => TemperatureConverterPage(), transition: Transition.native);
         break;
       case 'Speed':
         Get.to(() => AreaConverterPage(), transition: Transition.native);
