@@ -28,7 +28,7 @@ class SettingsPage extends StatelessWidget {
               width: 300,
               height: 200,
               decoration: BoxDecoration(
-                color: tertiaryColor,
+                color: primaryColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -37,11 +37,11 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     title: const Text('Version'),
                     subtitle:
-                        Text('1.0.0', style: TextStyle(color: secondaryColor)),
+                        Text('1.0.0', style: TextStyle(color: tertiaryColor)),
                   ),
                   ListTile(
                     title: const Text('About'),
-                    leading: Icon(Icons.info, color: primaryColor),
+                    leading: Icon(Icons.info, color: tertiaryColor),
                     trailing: Icon(Icons.arrow_right, size: 28),
                     onTap: () {
                       Get.to(AboutPage());
@@ -50,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     title: const Text('Privacy'),
                     leading:
-                        Icon(Icons.privacy_tip_outlined, color: primaryColor),
+                        Icon(Icons.privacy_tip_outlined, color: tertiaryColor),
                     trailing: Icon(Icons.arrow_right, size: 28),
                     onTap: () {
                       // Handle onTap action

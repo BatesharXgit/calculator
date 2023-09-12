@@ -20,8 +20,6 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Color backgroundColour = Theme.of(context).colorScheme.background;
     Color primaryColour = Theme.of(context).colorScheme.primary;
-    Color secondaryColour = Theme.of(context).colorScheme.secondary;
-    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: null,
       backgroundColor: backgroundColour,
