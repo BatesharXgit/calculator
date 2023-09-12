@@ -1,4 +1,3 @@
-import 'package:calculator/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -64,7 +63,7 @@ class CalculatorButtonRed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color secondaryColour = Theme.of(context).colorScheme.secondary;
-    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
+    // Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
     return Container(
       margin: EdgeInsets.all(10),
       child: SizedBox(

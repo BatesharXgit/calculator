@@ -132,24 +132,29 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(right: 12),
-                child: Text(
-                  _history,
-                  style: GoogleFonts.rubik(
-                      textStyle: TextStyle(fontSize: 24), color: kHistoryColor),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(right: 10, left: 10),
+                  child: Text(
+                    _history,
+                    style: GoogleFonts.rubik(
+                        textStyle: TextStyle(fontSize: 24),
+                        color: kHistoryColor),
+                  ),
+                  alignment: Alignment(1, 1),
                 ),
-                alignment: Alignment(1, 1),
               ),
-              Container(
-                padding: EdgeInsets.all(12),
-                child: Text(
-                  _expression,
-                  style: GoogleFonts.rubik(
-                      textStyle: TextStyle(fontSize: 48),
-                      color: tertiaryColour),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    _expression,
+                    style: GoogleFonts.rubik(
+                        textStyle: TextStyle(fontSize: 48),
+                        color: tertiaryColour),
+                  ),
+                  alignment: kExpressionAligment,
                 ),
-                alignment: kExpressionAligment,
               ),
               SizedBox(height: 20),
               Row(

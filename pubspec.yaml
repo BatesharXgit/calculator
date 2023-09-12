@@ -39,7 +39,7 @@ dependencies:
   get: ^4.6.5
   math_expressions: ^2.4.0
   google_fonts: ^5.1.0
-  dropdown_button2: ^2.3.9
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:

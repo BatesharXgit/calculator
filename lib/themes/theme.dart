@@ -20,7 +20,7 @@ ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.light(
       background: Color(0xFFECECEC),
       primary: Color(0xFFC5C5C5),
-      secondary: Colors.grey,
+      secondary: Color.fromARGB(255, 204, 200, 200),
       tertiary: Color(0xFF292D32)),
   iconTheme: IconThemeData(
     color: Color(0xFF131321),

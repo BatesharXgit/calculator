@@ -17,10 +17,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//dark                                           //white
-//#353A40    grey, result page                  //#FEFEFE 
-//#212429    dark grey, main colour             //#F1F1F1
-//#23262B    fill colour                        //#F0F0F0
-//#F56A7A    red colour                         
-//#6BD66A    green colour
