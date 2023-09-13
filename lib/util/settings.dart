@@ -13,10 +13,14 @@ class SettingsPage extends StatelessWidget {
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
-        title: Text("Settings"),
+        title: Text(
+          "Settings",
+          style: TextStyle(color: tertiaryColor),
+        ),
       ),
       backgroundColor: backgroundColor,
       body: SafeArea(

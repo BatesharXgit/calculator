@@ -43,6 +43,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         backgroundColor: backgroundColor,
         elevation: 0,
         centerTitle: true,

@@ -30,15 +30,16 @@ class _BMICalculatorState extends State<BMICalculator> {
     Color backgroundColour = Theme.of(context).colorScheme.background;
     Color primaryColour = Theme.of(context).colorScheme.primary;
     Color secondaryColour = Theme.of(context).colorScheme.secondary;
-    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         centerTitle: true,
         backgroundColor: backgroundColour,
         title: Text(
           'BMI Calculator',
-          style: TextStyle(color: tertiaryColour),
+          style: TextStyle(color: tertiaryColor),
         ),
       ),
       backgroundColor: backgroundColour,

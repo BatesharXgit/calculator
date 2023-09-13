@@ -86,6 +86,7 @@ class _LengthConverterPageState extends State<LengthConverterPage> {
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -273,6 +274,7 @@ class _AreaConverterPageState extends State<AreaConverterPage> {
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -459,6 +461,7 @@ class _VolumeConverterPageState extends State<VolumeConverterPage> {
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -646,6 +649,7 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -831,6 +835,7 @@ class _TemperatureConverterPageState extends State<TemperatureConverterPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -1015,6 +1020,7 @@ class _SpeedConverterPageState extends State<SpeedConverterPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -1203,6 +1209,7 @@ class _PressureConverterPageState extends State<PressureConverterPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
@@ -1391,6 +1398,7 @@ class _PowerConverterPageState extends State<PowerConverterPage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
         elevation: 0,
         backgroundColor: backgroundColor,
         centerTitle: true,
