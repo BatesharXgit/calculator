@@ -1,34 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class HistoryPage extends StatelessWidget {
-  final Future<List<String>> historyList;
+  final Future<List<String>> historyListFuture;
+  final Function() clearHistoryCallback;
 
-  HistoryPage({required this.historyList});
+  HistoryPage({
+    required this.historyListFuture,
+    required this.clearHistoryCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColour = Theme.of(context).colorScheme.background;
+    Color primaryColour = Theme.of(context).colorScheme.primary;
+    Color secondaryColour = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calculation History'),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: backgroundColour,
+        title: Text(
+          'Calculation History',
+          style: TextStyle(color: tertiaryColour),
+        ),
       ),
-      body: FutureBuilder<List<String>>(
-        future: historyList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator(); // Display a loading indicator if history is still loading
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(snapshot.data![index]),
-                );
-              },
-            );
-          }
-        },
+      backgroundColor: backgroundColour,
+      body: Center(
+        child: FutureBuilder<List<String>>(
+          future: historyListFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              final historyList = snapshot.data ?? [];
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: historyList.length,
+                      itemBuilder: (context, index) {
+                        final reversedIndex = historyList.length - 1 - index;
+                        return ListTile(
+                          title: Text(historyList[reversedIndex]),
+                        );
+                      },
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      clearHistoryCallback(); // Call the provided callback to clear history
+                    },
+                    child: Text('Clear History'),
+                  ),
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }

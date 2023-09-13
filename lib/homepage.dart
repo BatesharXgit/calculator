@@ -42,9 +42,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Save the calculation history to SharedPreferences
-  void _saveHistory(List<String> historyList) {
+  Future<void> _saveHistory(List<String> historyList) async {
     if (_prefs != null) {
-      _prefs!.setStringList('history', historyList);
+      await _prefs!.setStringList('history', historyList);
     }
   }
 
@@ -53,6 +53,13 @@ class _HomePageState extends State<HomePage> {
       return _prefs!.getStringList('history') ?? [];
     }
     return [];
+  }
+
+  void clearHistory() {
+    setState(() {
+      calculationHistory.clear();
+      _saveHistory(calculationHistory); // Clear history in SharedPreferences
+    });
   }
 
   bool isAnOperator(String number) {
@@ -88,73 +95,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // void onNumberClick(String number) {
-  //   if (number == '.' && !_isDecimalUsed) {
-  //     setState(() {
-  //       _isDecimalUsed = true;
-  //       _expression += number;
-  //     });
-  //   } else if (!_isDecimalUsed || number != '.') {
-  //     setState(() {
-  //       if (_isCalculated) {
-  //         // If a calculation has been performed, start a new expression.
-  //         _history = _expression; // Move the current expression to history.
-  //         _expression = number;
-  //         _isCalculated = false;
-  //       } else {
-  //         // Check if the last character is an operator and replace it.
-  //         final lastChar =
-  //             _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
-  //         if (isAnOperator(lastChar) && isAnOperator(number)) {
-  //           // Replace the last character with the new operator.
-  //           _expression =
-  //               _expression.substring(0, _expression.length - 1) + number;
-  //         } else {
-  //           _expression += number;
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
-  // void onNumberClick(String number) {
-  //   if (number == '.' && !_isDecimalUsed) {
-  //     setState(() {
-  //       _isDecimalUsed = true;
-  //       _expression += number;
-  //     });
-  //   } else if (!_isDecimalUsed || number != '.') {
-  //     setState(() {
-  //       if (_isCalculated) {
-  //         // If a calculation has been performed, start a new expression.
-  //         _history = _expression; // Move the current expression to history.
-  //         _expression = number;
-  //         _isCalculated = false;
-  //       } else if (number == '√') {
-  //         // Handle square root input directly.
-  //         _expression += '√';
-  //       } else if (number == '-' &&
-  //           (_expression.isEmpty ||
-  //               _expression.endsWith('+') ||
-  //               _expression.endsWith('-') ||
-  //               _expression.endsWith('×') ||
-  //               _expression.endsWith('/'))) {
-  //         // Allow adding a minus sign at the beginning of an expression.
-  //         _expression += number;
-  //       } else {
-  //         // Check if the last character is an operator and replace it.
-  //         final lastChar =
-  //             _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
-  //         if (isAnOperator(lastChar) && isAnOperator(number)) {
-  //           // Replace the last character with the new operator.
-  //           _expression =
-  //               _expression.substring(0, _expression.length - 1) + number;
-  //         } else {
-  //           _expression += number;
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
   void onNumberClick(String number) {
     if (number == '.' && !_expression.contains('.') && !_isCalculated) {
       // Allow a decimal point only if it hasn't been used and no calculation has been done.
@@ -303,7 +243,9 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => HistoryPage(
-                                      historyList: Future.value(history)),
+                                    historyListFuture: Future.value(history),
+                                    clearHistoryCallback: clearHistory,
+                                  ),
                                 ),
                               );
                             });
@@ -312,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.history_outlined,
                             size: 28,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
