@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HistoryPage extends StatelessWidget {
   final Future<List<String>> historyListFuture;
@@ -13,11 +14,11 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Color backgroundColour = Theme.of(context).colorScheme.background;
     Color primaryColour = Theme.of(context).colorScheme.primary;
-    Color secondaryColour = Theme.of(context).colorScheme.secondary;
     Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColour),
         elevation: 0,
         centerTitle: true,
         backgroundColor: backgroundColour,
@@ -45,16 +46,24 @@ class HistoryPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final reversedIndex = historyList.length - 1 - index;
                         return ListTile(
-                          title: Text(historyList[reversedIndex]),
+                          title: Text(
+                            historyList[reversedIndex],
+                            style: GoogleFonts.rubik(color: tertiaryColour),
+                          ),
                         );
                       },
                     ),
                   ),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColour),
                     onPressed: () {
                       clearHistoryCallback(); // Call the provided callback to clear history
                     },
-                    child: Text('Clear History'),
+                    child: Text(
+                      'Clear History',
+                      style: GoogleFonts.rubik(color: tertiaryColour),
+                    ),
                   ),
                 ],
               );
