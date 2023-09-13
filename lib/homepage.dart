@@ -59,6 +59,34 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // void onNumberClick(String number) {
+  //   if (number == '.' && !_isDecimalUsed) {
+  //     setState(() {
+  //       _isDecimalUsed = true;
+  //       _expression += number;
+  //     });
+  //   } else if (!_isDecimalUsed || number != '.') {
+  //     setState(() {
+  //       if (_isCalculated) {
+  //         // If a calculation has been performed, start a new expression.
+  //         _history = _expression; // Move the current expression to history.
+  //         _expression = number;
+  //         _isCalculated = false;
+  //       } else {
+  //         // Check if the last character is an operator and replace it.
+  //         final lastChar =
+  //             _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
+  //         if (isAnOperator(lastChar) && isAnOperator(number)) {
+  //           // Replace the last character with the new operator.
+  //           _expression =
+  //               _expression.substring(0, _expression.length - 1) + number;
+  //         } else {
+  //           _expression += number;
+  //         }
+  //       }
+  //     });
+  //   }
+  // }
   void onNumberClick(String number) {
     if (number == '.' && !_isDecimalUsed) {
       setState(() {
@@ -72,6 +100,17 @@ class _HomePageState extends State<HomePage> {
           _history = _expression; // Move the current expression to history.
           _expression = number;
           _isCalculated = false;
+        } else if (number == '√') {
+          // Handle square root input directly.
+          _expression += '√';
+        } else if (number == '-' &&
+            (_expression.isEmpty ||
+                _expression.endsWith('+') ||
+                _expression.endsWith('-') ||
+                _expression.endsWith('×') ||
+                _expression.endsWith('/'))) {
+          // Allow adding a minus sign at the beginning of an expression.
+          _expression += number;
         } else {
           // Check if the last character is an operator and replace it.
           final lastChar =
@@ -330,12 +369,12 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Color(0xFF6BD66A),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 'BMI',
-                style: TextStyle(
+                style: GoogleFonts.rubik(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),

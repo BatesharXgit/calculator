@@ -12,7 +12,7 @@ class UnitConverterPage extends StatefulWidget {
 
 class _UnitConverterPageState extends State<UnitConverterPage> {
   List<String> _units = [
-    'Currency',
+    // 'Currency',
     'Length',
     'Area',
     'Volume',
@@ -24,7 +24,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
   ];
 
   List<IconData> _icons = [
-    Iconsax.bitcoin_convert,
+    // Iconsax.bitcoin_convert,
     Iconsax.ruler,
     Icons.aspect_ratio,
     Iconsax.convert_3d_cube,
@@ -103,9 +103,9 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
 
   void _navigateToCategoryPage(String unitName) {
     switch (unitName) {
-      case 'Currency':
-        Get.to(() => AreaConverterPage(), transition: Transition.native);
-        break;
+      // case 'Currency':
+      //   Get.to(() => AreaConverterPage(), transition: Transition.native);
+      //   break;
       case 'Length':
         Get.to(() => LengthConverterPage(), transition: Transition.native);
         break;
