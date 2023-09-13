@@ -85,7 +85,23 @@ class AboutPage extends StatelessWidget {
                         title: const Text('Open source licenses'),
                         trailing: Icon(Icons.arrow_right, size: 28),
                         onTap: () {
-                          showLicensePage(context: context);
+                          showLicensePage(
+                            context: context,
+                            applicationName: 'Calculator',
+                            applicationVersion: "1.0.0",
+                            applicationIcon: Container(
+                              // padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                  'assets/calculator.png',
+                                )),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ],
