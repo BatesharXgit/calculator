@@ -1521,3 +1521,205 @@ class _PowerConverterPageState extends State<PowerConverterPage> {
     );
   }
 }
+
+class StorageConverterPage extends StatefulWidget {
+  @override
+  _StorageConverterPageState createState() => _StorageConverterPageState();
+}
+
+class _StorageConverterPageState extends State<StorageConverterPage> {
+  double inputValue = 0.0;
+  double outputValue = 0.0;
+
+  String selectedInputUnit = 'Bytes';
+  String selectedOutputUnit = 'Megabytes';
+
+  Map<String, double> storageUnits = {
+    'Bits': 0.125,
+    'Bytes': 1.0,
+    'Kilobits': 0.000125,
+    'Kilobytes': 0.001,
+    'Megabits': 0.000001,
+    'Megabytes': 0.000000125,
+    'Gigabits': 0.000000001,
+    'Gigabytes': 0.000000000125,
+    'Terabits': 0.000000000001,
+    'Terabytes': 0.000000000000125,
+    'Petabits': 0.000000000000001,
+    'Petabytes': 0.000000000000000125,
+    // Add more units as needed
+  };
+
+  List<Map<String, String>> storageUnitsWithAbbreviations = [
+    {'name': 'Bits', 'abbreviation': 'b'},
+    {'name': 'Bytes', 'abbreviation': 'B'},
+    {'name': 'Kilobits', 'abbreviation': 'Kb'},
+    {'name': 'Kilobytes', 'abbreviation': 'KB'},
+    {'name': 'Megabits', 'abbreviation': 'Mb'},
+    {'name': 'Megabytes', 'abbreviation': 'MB'},
+    {'name': 'Gigabits', 'abbreviation': 'Gb'},
+    {'name': 'Gigabytes', 'abbreviation': 'GB'},
+    {'name': 'Terabits', 'abbreviation': 'Tb'},
+    {'name': 'Terabytes', 'abbreviation': 'TB'},
+    {'name': 'Petabits', 'abbreviation': 'Pb'},
+    {'name': 'Petabytes', 'abbreviation': 'PB'},
+    // Add more units as needed
+  ];
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        inputValue = double.tryParse(inputController.text) ?? 0.0;
+        convertStorage();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  void convertStorage() {
+    double inputFactor = storageUnits[selectedInputUnit]!;
+    double outputFactor = storageUnits[selectedOutputUnit]!;
+    setState(() {
+      outputValue = inputValue * (outputFactor / inputFactor);
+      outputValue = double.parse(outputValue.toStringAsFixed(4));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Storage Conversion',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$outputValue $selectedOutputUnit',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: tertiaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedInputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedInputUnit = value!;
+                            convertStorage();
+                          });
+                        },
+                        items: storageUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  color: tertiaryColor,
+                  size: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: tertiaryColor,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        value: selectedOutputUnit,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOutputUnit = value!;
+                            convertStorage();
+                          });
+                        },
+                        items: storageUnitsWithAbbreviations.map((unit) {
+                          return DropdownMenuItem<String>(
+                            value: unit['name']!,
+                            child: Text(
+                                '${unit['name']} (${unit['abbreviation']})'),
+                          );
+                        }).toList(),
+                        style: TextStyle(color: tertiaryColor),
+                        underline: Container(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Storage',
+                fillColor: tertiaryColor,
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
