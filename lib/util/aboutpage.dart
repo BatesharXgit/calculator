@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -33,11 +34,31 @@ class AboutPage extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.calculate_outlined,
-                      size: 100,
+                    Container(
+                      // padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                          'assets/calculator.png',
+                        )),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
-                    Text("Calculator"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Calculator",
+                      style: GoogleFonts.orbitron(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: tertiaryColor),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text('1.0.0'),
                   ],
                 ),

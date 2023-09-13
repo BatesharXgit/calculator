@@ -379,15 +379,13 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              Builder(builder: (context) {
-                return Text(
-                  'Calculator',
-                  style: GoogleFonts.orbitron(
-                      color: tertiaryColour,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
-                );
-              })
+              Text(
+                'Calculator',
+                style: GoogleFonts.orbitron(
+                    color: tertiaryColour,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              )
             ],
           ),
         ),

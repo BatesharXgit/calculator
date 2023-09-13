@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                   ListTile(
                     title: const Text('About'),
-                    leading: Icon(Icons.info, color: tertiaryColor),
+                    leading: Icon(Icons.info_outline, color: tertiaryColor),
                     trailing: Icon(Icons.arrow_right, size: 28),
                     onTap: () {
                       Get.to(AboutPage());
