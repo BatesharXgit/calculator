@@ -3,6 +3,7 @@ import 'package:calculator/calculator/constants.dart';
 import 'package:calculator/calculator/modules/ReplaceHumanReadableChars.dart';
 import 'package:calculator/calculator/widgets/CalculatorButton.dart';
 import 'package:calculator/themes/theme.dart';
+import 'package:calculator/util/history.dart';
 import 'package:calculator/util/settings.dart';
 import 'package:calculator/unitConverter/converterCategory.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key, required this.title}) : super(key: key);
@@ -21,11 +23,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  SharedPreferences? _prefs;
   List<String> calculationHistory = [];
   String _history = '';
   String _expression = '';
   bool _isDecimalUsed = false;
   bool _isCalculated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPrefs(); // Initialize SharedPreferences
+  }
+
+  // Initialize SharedPreferences
+  Future<void> _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  // Save the calculation history to SharedPreferences
+  void _saveHistory(List<String> historyList) {
+    if (_prefs != null) {
+      _prefs!.setStringList('history', historyList);
+    }
+  }
+
+  Future<List<String>> _getHistory() async {
+    if (_prefs != null) {
+      return _prefs!.getStringList('history') ?? [];
+    }
+    return [];
+  }
 
   bool isAnOperator(String number) {
     return "/%√×-+".contains(number);
@@ -179,7 +207,11 @@ class _HomePageState extends State<HomePage> {
       _expression = result;
       _isCalculated = false;
 
-      calculationHistory.add(_history); // add calculations to history page
+      // Add the current calculation to the history list
+      calculationHistory.add(_history);
+
+      // Save the updated history list to SharedPreferences
+      _saveHistory(calculationHistory);
     });
   }
 
@@ -263,7 +295,25 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [Icon(Icons.history)],
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            _getHistory().then((history) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HistoryPage(
+                                      historyList: Future.value(history)),
+                                ),
+                              );
+                            });
+                          },
+                          icon: Icon(
+                            Icons.history_outlined,
+                            size: 28,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
