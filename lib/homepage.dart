@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Stack(
           children: [
-            topBar(),
+            topBar(context),
             Positioned(
               bottom: 0,
               child: Container(
@@ -356,44 +356,80 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget topBar() {
+  Widget topBar(BuildContext context) {
+    Color tertiaryColour = Theme.of(context).colorScheme.tertiary;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Material(
-          elevation: 4,
-          borderRadius: BorderRadius.circular(8),
-          child: InkWell(
-            onTap: () => Get.to(BMICalculator()),
-            borderRadius: BorderRadius.circular(8),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-              decoration: BoxDecoration(
-                color: Color(0xFF6BD66A),
-                borderRadius: BorderRadius.circular(8),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                // padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                    'assets/calculator.png',
+                  )),
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
-              child: Text(
-                'BMI',
-                style: GoogleFonts.rubik(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              Builder(builder: (context) {
+                return Text(
+                  'Calculator',
+                  style: GoogleFonts.orbitron(
+                      color: tertiaryColour,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                );
+              })
+            ],
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Material(
+              elevation: 4,
+              borderRadius: BorderRadius.circular(8),
+              child: InkWell(
+                onTap: () => Get.to(BMICalculator()),
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF6BD66A),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    'BMI',
+                    style: GoogleFonts.rubik(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-        SizedBox(width: 12),
-        IconButton(
-          iconSize: 28,
-          icon: Icon(Iconsax.convertshape),
-          onPressed: () =>
-              Get.to(UnitConverterPage(), transition: Transition.native),
-        ),
-        IconButton(
-          iconSize: 30,
-          icon: Icon(Iconsax.setting_3),
-          onPressed: () =>
-              Get.to(SettingsPage(), transition: Transition.native),
+            // SizedBox(width: 5),
+            IconButton(
+              iconSize: 28,
+              icon: Icon(Iconsax.convertshape),
+              onPressed: () =>
+                  Get.to(UnitConverterPage(), transition: Transition.native),
+            ),
+            IconButton(
+              iconSize: 30,
+              icon: Icon(Iconsax.setting_3),
+              onPressed: () =>
+                  Get.to(SettingsPage(), transition: Transition.native),
+            ),
+          ],
         ),
       ],
     );
