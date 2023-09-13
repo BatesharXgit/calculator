@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> calculationHistory = [];
   String _history = '';
   String _expression = '';
   bool _isDecimalUsed = false;
@@ -87,13 +88,52 @@ class _HomePageState extends State<HomePage> {
   //     });
   //   }
   // }
+  // void onNumberClick(String number) {
+  //   if (number == '.' && !_isDecimalUsed) {
+  //     setState(() {
+  //       _isDecimalUsed = true;
+  //       _expression += number;
+  //     });
+  //   } else if (!_isDecimalUsed || number != '.') {
+  //     setState(() {
+  //       if (_isCalculated) {
+  //         // If a calculation has been performed, start a new expression.
+  //         _history = _expression; // Move the current expression to history.
+  //         _expression = number;
+  //         _isCalculated = false;
+  //       } else if (number == '√') {
+  //         // Handle square root input directly.
+  //         _expression += '√';
+  //       } else if (number == '-' &&
+  //           (_expression.isEmpty ||
+  //               _expression.endsWith('+') ||
+  //               _expression.endsWith('-') ||
+  //               _expression.endsWith('×') ||
+  //               _expression.endsWith('/'))) {
+  //         // Allow adding a minus sign at the beginning of an expression.
+  //         _expression += number;
+  //       } else {
+  //         // Check if the last character is an operator and replace it.
+  //         final lastChar =
+  //             _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
+  //         if (isAnOperator(lastChar) && isAnOperator(number)) {
+  //           // Replace the last character with the new operator.
+  //           _expression =
+  //               _expression.substring(0, _expression.length - 1) + number;
+  //         } else {
+  //           _expression += number;
+  //         }
+  //       }
+  //     });
+  //   }
+  // }
   void onNumberClick(String number) {
-    if (number == '.' && !_isDecimalUsed) {
+    if (number == '.' && !_expression.contains('.') && !_isCalculated) {
+      // Allow a decimal point only if it hasn't been used and no calculation has been done.
       setState(() {
-        _isDecimalUsed = true;
         _expression += number;
       });
-    } else if (!_isDecimalUsed || number != '.') {
+    } else if (number != '.' || !_isDecimalUsed) {
       setState(() {
         if (_isCalculated) {
           // If a calculation has been performed, start a new expression.
@@ -103,14 +143,6 @@ class _HomePageState extends State<HomePage> {
         } else if (number == '√') {
           // Handle square root input directly.
           _expression += '√';
-        } else if (number == '-' &&
-            (_expression.isEmpty ||
-                _expression.endsWith('+') ||
-                _expression.endsWith('-') ||
-                _expression.endsWith('×') ||
-                _expression.endsWith('/'))) {
-          // Allow adding a minus sign at the beginning of an expression.
-          _expression += number;
         } else {
           // Check if the last character is an operator and replace it.
           final lastChar =
@@ -146,6 +178,8 @@ class _HomePageState extends State<HomePage> {
       }
       _expression = result;
       _isCalculated = false;
+
+      calculationHistory.add(_history); // add calculations to history page
     });
   }
 
@@ -202,23 +236,35 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  CalculatorButtonRed(
-                      label: 'AC',
-                      // fillColor: secondaryColour,
-                      textSize: 22,
-                      callback: onAllClearClick),
-                  CalculatorButtonGreen(
-                    label: 'C',
-                    // fillColor: secondaryColour,
-                    callback: onClearClick,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CalculatorButtonRed(
+                          label: 'AC',
+                          // fillColor: secondaryColour,
+                          textSize: 22,
+                          callback: onAllClearClick),
+                      CalculatorButtonGreen(
+                        label: 'C',
+                        // fillColor: secondaryColour,
+                        callback: onClearClick,
+                      ),
+                    ],
                   ),
                   SizedBox(
                     width: 85,
                   ),
-                  SizedBox(
-                    width: 85,
+                  // SizedBox(
+                  //   width: 85,
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [Icon(Icons.history)],
+                    ),
                   ),
                 ],
               ),
