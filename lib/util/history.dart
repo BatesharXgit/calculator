@@ -58,7 +58,8 @@ class HistoryPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColour),
                     onPressed: () {
-                      clearHistoryCallback(); // Call the provided callback to clear history
+                      clearHistoryCallback();
+                      Navigator.pop(context);
                     },
                     child: Text(
                       'Clear History',
