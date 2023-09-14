@@ -133,6 +133,9 @@ class _HomePageState extends State<HomePage> {
               _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
           if (lastChar != '√' && !isAnOperator(lastChar)) {
             _expression += '√';
+          } else if (isAnOperator(lastChar)) {
+            // If the last character is an operator, add '√' after it.
+            _expression += '√';
           }
         } else if (RegExp(r'^\d*√').hasMatch(number)) {
           // Handle expressions like "2√25" as a single unit.
