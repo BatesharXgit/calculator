@@ -129,7 +129,11 @@ class _HomePageState extends State<HomePage> {
           }
         } else if (number == '√') {
           // Handle square root input directly.
-          _expression += '√';
+          final lastChar =
+              _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
+          if (lastChar != '√' && !isAnOperator(lastChar)) {
+            _expression += '√';
+          }
         } else if (RegExp(r'^\d*√').hasMatch(number)) {
           // Handle expressions like "2√25" as a single unit.
           _expression += number;
