@@ -41,10 +41,16 @@ dependencies:
   google_fonts: ^5.1.0
   iconsax: ^0.0.8
   shared_preferences: ^2.2.1
+  flutter_launcher_icons: ^0.13.1
+  rename: ^2.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  image_path: "assets/calculator.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
