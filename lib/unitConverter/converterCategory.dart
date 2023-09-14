@@ -13,10 +13,12 @@ class UnitConverterPage extends StatefulWidget {
 class _UnitConverterPageState extends State<UnitConverterPage> {
   List<String> _units = [
     // 'Currency',
+    'Age',
     'Length',
     'Area',
     'Data',
     'Volume',
+    'Discount',
     'Weight',
     'Temperature',
     'Speed',
@@ -26,10 +28,12 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
 
   List<IconData> _icons = [
     // Iconsax.bitcoin_convert,
+    Iconsax.cake,
     Iconsax.ruler,
     Icons.aspect_ratio,
     Iconsax.data,
     Iconsax.convert_3d_cube,
+    Iconsax.discount_shape,
     Iconsax.weight,
     Icons.thermostat_outlined,
     Icons.speed,
@@ -135,6 +139,12 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
         break;
       case 'Power':
         Get.to(() => PowerConverterPage(), transition: Transition.native);
+        break;
+      case 'Age':
+        Get.to(() => AgeCalculatorPage(), transition: Transition.native);
+        break;
+      case 'Discount':
+        Get.to(() => DiscountCalculatorPage(), transition: Transition.native);
         break;
       default:
         break;

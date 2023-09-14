@@ -1723,3 +1723,243 @@ class _StorageConverterPageState extends State<StorageConverterPage> {
     );
   }
 }
+
+class AgeCalculatorPage extends StatefulWidget {
+  @override
+  _AgeCalculatorPageState createState() => _AgeCalculatorPageState();
+}
+
+class _AgeCalculatorPageState extends State<AgeCalculatorPage> {
+  DateTime? birthdate;
+  String age = 'Age:';
+
+  TextEditingController inputController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    inputController.addListener(() {
+      setState(() {
+        // Parse the input date and calculate age
+        String inputDate = inputController.text;
+        if (inputDate.isNotEmpty) {
+          List<String> dateParts = inputDate.split('/');
+          if (dateParts.length == 3) {
+            int day = int.tryParse(dateParts[0]) ?? 0;
+            int month = int.tryParse(dateParts[1]) ?? 0;
+            int year = int.tryParse(dateParts[2]) ?? 0;
+
+            birthdate = DateTime(year, month, day);
+            if (birthdate != null) {
+              // Calculate age
+              DateTime now = DateTime.now();
+              int ageYears = now.year - birthdate!.year;
+              int ageMonths = now.month - birthdate!.month;
+              int ageDays = now.day - birthdate!.day;
+
+              if (ageDays < 0) {
+                ageMonths--;
+                ageDays += 30; // Assuming 30 days in a month
+              }
+              if (ageMonths < 0) {
+                ageYears--;
+                ageMonths += 12;
+              }
+
+              age = 'Age: $ageYears years $ageMonths months $ageDays days';
+            } else {
+              age = 'Invalid date';
+            }
+          } else {
+            age = 'Invalid date format';
+          }
+        } else {
+          age = 'Age:';
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Age Calculator',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              age,
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: tertiaryColor,
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            TextFormField(
+              controller: inputController,
+              keyboardType: TextInputType.datetime,
+              decoration: InputDecoration(
+                labelText: 'Enter Birthdate (DD/MM/YYYY)',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DiscountCalculatorPage extends StatefulWidget {
+  @override
+  _DiscountCalculatorPageState createState() => _DiscountCalculatorPageState();
+}
+
+class _DiscountCalculatorPageState extends State<DiscountCalculatorPage> {
+  double originalPrice = 0.0;
+  double discountPercentage = 0.0;
+  double discountedPrice = 0.0;
+
+  TextEditingController priceController = TextEditingController();
+  TextEditingController discountController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    priceController.addListener(calculateDiscount);
+    discountController.addListener(calculateDiscount);
+  }
+
+  @override
+  void dispose() {
+    priceController.dispose();
+    discountController.dispose();
+    super.dispose();
+  }
+
+  void calculateDiscount() {
+    double price = double.tryParse(priceController.text) ?? 0.0;
+    double discount = double.tryParse(discountController.text) ?? 0.0;
+
+    setState(() {
+      originalPrice = price;
+      discountPercentage = discount;
+      discountedPrice = price - (price * discount / 100);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: tertiaryColor),
+        elevation: 0,
+        backgroundColor: backgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Discount Calculator',
+          style: TextStyle(color: tertiaryColor),
+        ),
+      ),
+      backgroundColor: backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Original Price: \$${originalPrice.toStringAsFixed(2)}',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: tertiaryColor,
+              ),
+            ),
+            Text(
+              'Discount Percentage: ${discountPercentage.toStringAsFixed(2)}%',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: tertiaryColor,
+              ),
+            ),
+            Text(
+              'Discounted Price: ',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: tertiaryColor,
+              ),
+            ),
+            Text(
+              '\$${discountedPrice.toStringAsFixed(2)}',
+              style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.green, // Highlighted color
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: priceController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Original Price',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: discountController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Enter Discount Percentage',
+                fillColor: tertiaryColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
