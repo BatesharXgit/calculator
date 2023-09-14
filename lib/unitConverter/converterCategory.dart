@@ -28,7 +28,7 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
     // Iconsax.bitcoin_convert,
     Iconsax.ruler,
     Icons.aspect_ratio,
-    Iconsax.data1,
+    Iconsax.data,
     Iconsax.convert_3d_cube,
     Iconsax.weight,
     Icons.thermostat_outlined,
@@ -111,6 +111,9 @@ class _UnitConverterPageState extends State<UnitConverterPage> {
       //   break;
       case 'Length':
         Get.to(() => LengthConverterPage(), transition: Transition.native);
+        break;
+      case 'Data':
+        Get.to(() => StorageConverterPage(), transition: Transition.native);
         break;
       case 'Area':
         Get.to(() => AreaConverterPage(), transition: Transition.native);
