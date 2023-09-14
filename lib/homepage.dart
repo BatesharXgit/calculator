@@ -105,14 +105,36 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         if (_isCalculated) {
           // If a calculation has been performed, start a new expression.
-          _history = _expression; // Move the current expression to history.
-          _expression = number;
+          _history = _expression + ' = ' + _history;
+          _expression = '';
           _isCalculated = false;
+        }
+
+        if (number == '-') {
+          // Allow a negative sign at the beginning of the expression.
+          if (_expression.isEmpty) {
+            _expression = '-';
+          } else {
+            // Check if the last character is an operator and replace it.
+            final lastChar = _expression.isNotEmpty
+                ? _expression[_expression.length - 1]
+                : '';
+            if (isAnOperator(lastChar) && isAnOperator(number)) {
+              // Replace the last character with the new operator.
+              _expression =
+                  _expression.substring(0, _expression.length - 1) + number;
+            } else {
+              _expression += number;
+            }
+          }
         } else if (number == '√') {
           // Handle square root input directly.
           _expression += '√';
+        } else if (RegExp(r'^\d*√').hasMatch(number)) {
+          // Handle expressions like "2√25" as a single unit.
+          _expression += number;
         } else {
-          // Check if the last character is an operator and replace it.
+          // Handle other digits and operators.
           final lastChar =
               _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
           if (isAnOperator(lastChar) && isAnOperator(number)) {
