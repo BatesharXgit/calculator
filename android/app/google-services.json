@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150227486545",
+    "project_id": "xd-calculator",
+    "storage_bucket": "xd-calculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150227486545:android:6f6245fc6f119ef3ee7570",
+        "android_client_info": {
+          "package_name": "com.xd.calculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKoC0I0om8Or7AyEc7KZydcrgRTbphTPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
