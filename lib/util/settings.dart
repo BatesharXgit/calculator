@@ -1,4 +1,5 @@
 import 'package:calculator/util/aboutpage.dart';
+import 'package:calculator/util/privacyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,7 +60,7 @@ class SettingsPage extends StatelessWidget {
                         Icon(Icons.privacy_tip_outlined, color: tertiaryColor),
                     trailing: Icon(Icons.arrow_right, size: 28),
                     onTap: () {
-                      // Handle onTap action
+                      Get.to(PrivacyPage());
                     },
                   ),
                 ],
