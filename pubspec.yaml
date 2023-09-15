@@ -42,7 +42,7 @@ dependencies:
   iconsax: ^0.0.8
   shared_preferences: ^2.2.1
   flutter_launcher_icons: ^0.13.1
-  rename: ^2.1.1
+  # rename: ^2.1.1
   firebase_core: ^2.15.1
 
 dev_dependencies:
