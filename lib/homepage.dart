@@ -201,7 +201,8 @@ class _HomePageState extends State<HomePage> {
             Positioned(
               bottom: 0,
               child: Container(
-                padding: EdgeInsets.fromLTRB(10, 400, 350, 0),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.515,
                 decoration: BoxDecoration(
                   color: primaryColour,
                   borderRadius: BorderRadius.only(
@@ -437,8 +438,8 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 // padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                width: 50,
-                height: 50,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
@@ -467,7 +468,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () => Get.to(BMICalculator()),
                 borderRadius: BorderRadius.circular(8),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
                     color: Color(0xFF6BD66A),
                     borderRadius: BorderRadius.circular(8),
@@ -484,13 +485,13 @@ class _HomePageState extends State<HomePage> {
             ),
             // SizedBox(width: 5),
             IconButton(
-              iconSize: 28,
+              iconSize: 25,
               icon: Icon(Iconsax.convertshape),
               onPressed: () =>
                   Get.to(UnitConverterPage(), transition: Transition.native),
             ),
             IconButton(
-              iconSize: 30,
+              iconSize: 25,
               icon: Icon(Iconsax.setting_3),
               onPressed: () =>
                   Get.to(SettingsPage(), transition: Transition.native),

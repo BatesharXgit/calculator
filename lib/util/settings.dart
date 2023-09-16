@@ -1,4 +1,3 @@
-import 'package:calculator/util/aboutpage.dart';
 import 'package:calculator/util/privacyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,8 +49,17 @@ class SettingsPage extends StatelessWidget {
                     title: const Text('About'),
                     leading: Icon(Icons.info_outline, color: tertiaryColor),
                     trailing: Icon(Icons.arrow_right, size: 28),
+                    // onTap: () {
+                    //   Get.to(AboutPage());
+                    // },
                     onTap: () {
-                      Get.to(AboutPage());
+                      return showAboutDialog(
+                        context: context,
+                        applicationName: 'Calculator',
+                        applicationVersion: '1.0.1',
+                        applicationIcon: const Icon(Icons.info_outline),
+                        applicationLegalese: '2023 Calculator by XD',
+                      );
                     },
                   ),
                   ListTile(
