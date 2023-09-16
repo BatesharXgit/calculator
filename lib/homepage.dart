@@ -131,15 +131,17 @@ class _HomePageState extends State<HomePage> {
           // Handle square root input directly.
           final lastChar =
               _expression.isNotEmpty ? _expression[_expression.length - 1] : '';
-          if (lastChar != '√' && !isAnOperator(lastChar)) {
-            _expression += '√';
-          } else if (isAnOperator(lastChar)) {
-            // If the last character is an operator, add '√' after it.
+          if (_expression.isEmpty ||
+              isAnOperator(lastChar) ||
+              lastChar == '√') {
+            // Only allow a square root symbol if the expression is empty, the last character is an operator, or the last character is already a square root symbol.
             _expression += '√';
           }
         } else if (RegExp(r'^\d*√').hasMatch(number)) {
           // Handle expressions like "2√25" as a single unit.
-          _expression += number;
+          if (!_expression.endsWith('√')) {
+            _expression += number;
+          }
         } else {
           // Handle other digits and operators.
           final lastChar =
@@ -199,8 +201,7 @@ class _HomePageState extends State<HomePage> {
             Positioned(
               bottom: 0,
               child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.515,
+                padding: EdgeInsets.fromLTRB(10, 400, 350, 0),
                 decoration: BoxDecoration(
                   color: primaryColour,
                   borderRadius: BorderRadius.only(

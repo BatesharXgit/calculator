@@ -18,7 +18,7 @@ ThemeData darkTheme = ThemeData(
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(
-    background: Color(0xFFECECEC),
+    background: Colors.white,
     primary: Color(0xFFC5C5C5),
     secondary: Color(0xFFD8D8D8),
     tertiary: Color(0xFF292D32),

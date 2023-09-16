@@ -87,6 +87,7 @@ class AboutPage extends StatelessWidget {
                         onTap: () {
                           showLicensePage(
                             context: context,
+                            useRootNavigator: true,
                             applicationName: 'Calculator',
                             applicationVersion: "1.0.0",
                             applicationIcon: Container(

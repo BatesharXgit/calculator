@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class PrivacyPage extends StatelessWidget {
   @override
+
+
+
+  
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
